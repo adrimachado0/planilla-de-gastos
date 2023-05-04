@@ -4,7 +4,7 @@ import NuevoPresupuesto from "./NuevoPresupuesto"
 const Header = ({presupuesto, setPresupuesto, isValidPresupuesto, setIsValidPresupuesto, gastos, setGastos}) => {
   return (
     <header>
-        <h1>Planificador de gastos</h1>
+        <h1>Planilla de gastos</h1>
 
         {isValidPresupuesto
         ? 
