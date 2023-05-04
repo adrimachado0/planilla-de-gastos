@@ -4,6 +4,7 @@ import ListadoGastos from './components/ListadoGastos'
 import Modal from './components/Modal'
 import { generarId } from './logic/logic'
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
+import Filtros from './components/Filtros'
 
 function App() {
 
@@ -22,6 +23,10 @@ function App() {
   )
 
   const [editar, setEditar] = useState({})
+
+  const [filtro, setFiltro] = useState("")
+
+  const [gastosFiltrados, setGastosFiltrados] = useState({})
 
   const handleNuevoGasto = () => {
     setModal(true)
@@ -79,6 +84,19 @@ function App() {
     setGastos(gastoEliminado)
   }
 
+  useEffect(() => {
+    if(filtro) {
+      const gastoFiltrado = gastos.filter(gasto => gasto.categoria === filtro)
+      setGastosFiltrados(gastoFiltrado)
+      return
+    }
+    setGastosFiltrados([])
+  }, [filtro])
+
+  const mostrarGastosFiltrados = () => {
+    console.log(gastosFiltrados)
+  }
+
   return (
     <div className={ modal ? "fijar" : ""}>
       <Header 
@@ -87,16 +105,23 @@ function App() {
         setPresupuesto={setPresupuesto}
         isValidPresupuesto = {isValidPresupuesto}
         setIsValidPresupuesto = {setIsValidPresupuesto}
+        setGastos={setGastos}
       />
       {
         isValidPresupuesto && 
         <>
           <main>
+            <Filtros 
+              filtro={filtro}
+              setFiltro={setFiltro}
+            />
             <ListadoGastos 
               gastos={gastos}
               editar={editar}
               setEditar={setEditar}
               eliminarGasto={eliminarGasto}
+              gastosFiltrados={gastosFiltrados}
+              filtro={filtro}
             />
           </main>
           <div className='nuevo-gasto'>
@@ -119,9 +144,8 @@ function App() {
           setEditar={setEditar}
         />
       }
-
+      <button onClick={mostrarGastosFiltrados}>A</button>
     </div>
-
   )
 }
 
