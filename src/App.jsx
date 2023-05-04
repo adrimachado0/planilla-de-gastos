@@ -66,18 +66,6 @@ function App() {
     return
   }, [])
 
-  // useEffect(() => {
-  //   console.log(localStorage.getItem("presupuesto"))
-  //   if(localStorage.getItem("presupuesto") > 0) {
-  //     const presupuestoLS = localStorage.getItem("presupuesto")
-  //     setPresupuesto(presupuestoLS)
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   localStorage.setItem("presupuesto", presupuesto)
-  // }, [presupuesto])
-
   const eliminarGasto = gastoEliminar => {
     const gastoEliminado = gastos.filter(gasto => gasto.id !== gastoEliminar.id)
 
@@ -92,10 +80,6 @@ function App() {
     }
     setGastosFiltrados([])
   }, [filtro])
-
-  const mostrarGastosFiltrados = () => {
-    console.log(gastosFiltrados)
-  }
 
   return (
     <div className={ modal ? "fijar" : ""}>
@@ -144,7 +128,6 @@ function App() {
           setEditar={setEditar}
         />
       }
-      <button onClick={mostrarGastosFiltrados}>A</button>
     </div>
   )
 }
